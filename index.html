@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pip-Babe</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="intro-video">
+        <video id="intro-video-player" width="100%" height="100%" autoplay>
+            <source src="assets/intro-video.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+    
+    <div class="pipboy" id="pipboy-content">
+        <nav>
+            <a href="#" id="inv-link">Inv</a>
+            <a href="#" id="quests-link">Quests</a>
+            <a href="#" id="radio-link">Radio</a>
+        </nav>
+        <div id="inv" class="section"> 
+            <div class="inv-content">
+                <input type="text" id="item-input" placeholder="Add item...">
+                <button onclick="addItem()">Add</button>
+            </div>
+            <ul id="item-list">
+            </ul>
+            <div id="item-error-message" style="display: none; color: red; margin-top: 20px; font-size: 14px;">Invalid object name</div>
+            <div class="item-details" id="item-details">
+                <img id="item-sprite" src="" alt="Item Image">
+                <div class="item-description-container">
+                    <div class="item-description" id="item-description"></div>
+                </div>
+            </div>
+        </div>
+        <div id="quests" class="section"> 
+            <ul id="quest-list">
+                <li id="quest-1" onclick="activateQuest('quest-1')">
+                La frequenza del cuore
+                </li>
+            </ul>
+            <div id="quest-description" style="display: none;">
+                <img id="quest-image" src="assets/img/signal-boy.png" alt="Signal Boy">
+                <p id="main-text">
+                    Hai captato una trasmissione misteriosa, sintonizzati sulla frequenza corretta per scoprire di cosa si tratta<br><br>
+                </p>
+                <div id="additional-text">
+                    Svela le rime nascoste nelle poesie per acquisire gli oggetti che ti porteranno alla soluzione<br><br>
+                    Usa il tuo Pip-Boy per aggiungere all’inventario gli oggetti scoperti
+                </div>
+            </div>
+        </div>
+        <div id="radio" class="section">
+            <input type="text" id="frequency" placeholder="FM" value=" FM">
+            <button onclick="setFrequency()">Set Frequency</button>
+            <p id="error-message" style="color: red; display: none;">Invalid frequency code</p>
+            <div id="video-container" style="display: none;">
+                <video id="wave-video" width="100%" height="100%" controls>
+                    <source src="assets/video/wave.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

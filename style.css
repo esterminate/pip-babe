@@ -1,0 +1,429 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+body {
+    background-color: #282a36;
+    color: #00ff00;
+    font-family: 'Press Start 2P', cursive;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+    background-image: url('assets/img/texture-background.jpg');
+    background-size: cover;
+}
+
+#intro-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.pipboy {
+    background-color: #1c1c1c;
+    border: none;
+    padding: 20px;
+    width: 700px;
+    height: 500px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px #00ff00;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    animation: screenFlicker 3s infinite;
+    display: none;
+}
+
+nav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #00ff00;
+    padding-bottom: 10px;
+    position: relative; 
+}
+
+nav a {
+    color: #00ff00;
+    text-transform: uppercase !important;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 20px;
+    transition: color 0.3s ease, transform 0.3s ease;
+    position: relative;
+    padding: 5px 0; 
+}
+
+nav a:hover {
+    color: #00ff00; 
+    transform: scale(1.1);
+}
+
+nav a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -2px; 
+    height: 2px;
+    width: 100%;
+    background-color: #00ff00;
+    transition: transform 0.3s ease;
+    transform: scaleX(0);
+    transform-origin: bottom right;
+}
+
+nav a.active::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+
+.section {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    flex-grow: 1;
+    overflow-y: auto;
+    border: none;
+    padding: 0 20px;
+    border-radius: 5px;
+    box-shadow: none;
+    background-color: #1c1c1c;
+    font-size: 16px;
+    height: 100%; 
+    box-sizing: border-box;
+}
+
+.section.active {
+    display: block;
+    opacity: 1;
+    margin-top: 0; 
+}
+
+.section.flicker {
+    animation: tvFlicker 0.5s ease-in-out;
+}
+
+@keyframes tvFlicker {
+    0%, 100% {
+        opacity: 1;
+    }
+    10% {
+        opacity: 0.9;
+    }
+    20% {
+        opacity: 0.7;
+    }
+    30% {
+        opacity: 0.9;
+    }
+    40% {
+        opacity: 0.5;
+    }
+    50% {
+        opacity: 0.8;
+    }
+    60% {
+        opacity: 0.4;
+    }
+    70% {
+        opacity: 0.7;
+    }
+    80% {
+        opacity: 0.3;
+    }
+    90% {
+        opacity: 0.9;
+    }
+}
+
+#video-container {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    margin-top: 20px;
+    background-color: #000;
+    border-radius: 0px;
+    border: 2px solid #00ff00;
+    box-sizing: border-box;
+}
+
+#wave-video {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+    pointer-events: none; 
+}
+
+#frequency {
+    width: calc(100% - 22px);
+    padding: 10px;
+    border: 2px solid #00ff00;
+    border-radius: 5px;
+    background-color: #1c1c1c;
+    color: #00ff00;
+    font-size: 16px;
+    margin-bottom: 10px;
+    box-shadow: inset 0 0 5px #00ff00;
+    overflow: hidden;
+}
+
+button {
+    background-color: #1c1c1c;
+    border: 2px solid #00ff00;
+    border-radius: 5px;
+    color: #00ff00;
+    font-size: 16px;
+    padding: 10px 20px;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-weight: bold;
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+    width: 180px;
+}
+
+button:hover {
+    background-color: #00ff00;
+    color: #1c1c1c;
+    border-color: #00ff00;
+}
+
+#error-message {
+    color: red;
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+#inv {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    border: none;
+    background-color: #1c1c1c;
+    border-radius: 5px;
+    box-shadow: none;
+}
+
+.inv-content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+#item-input {
+    width: calc(100% - 22px);
+    padding: 10px;
+    border: 2px solid #00ff00;
+    border-radius: 5px;
+    background-color: #1c1c1c;
+    color: #00ff00;
+    font-size: 16px;
+    box-shadow: inset 0 0 5px #00ff00;
+}
+
+#inv .inv-content button {
+        background-color: #1c1c1c;
+        border: 2px solid #00ff00;
+        border-radius: 5px;
+        color: #00ff00;
+        font-size: 16px;
+        padding: 10px 20px;
+        cursor: pointer;
+        text-transform: uppercase;
+        font-weight: bold;
+        transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+        width: 180px;
+}
+
+#inv, #radio, #quests {
+    margin-top: 0px; 
+    padding: 0px 20px;
+    will-change: margin-top, opacity; 
+    overflow: hidden;
+}
+
+#quests h2, #radio h2 {
+    margin: 0 0 10px 0;
+    color: #00ff00;
+}
+
+#quest-list, #item-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#quest-list li, #item-list li {
+    cursor: pointer;
+    background-color: #333;
+    padding: 10px;
+    border: 2px solid transparent;
+    border-radius: 0; 
+    margin-bottom: 10px;
+    color: #00ff00;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    position: relative;
+    text-align: left; 
+}
+
+#quest-list li.selected {
+    background-color: #00ff00;
+    color: #1c1c1c;
+    border-color: #00ff00;
+}
+
+#quest-list li.selected::before {
+    content: '';
+    position: absolute;
+    left: -15px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 10px;
+    height: 10px;
+    background-color: #00ff00;
+    border: 2px solid #1c1c1c;
+    border-radius: 0; 
+}
+
+#quest-description .main-text {
+    text-align: center; 
+    font-size: 13px; 
+    margin-bottom: 10px; 
+}
+
+#quest-description .additional-text {
+    background-color: rgba(0, 255, 0, 0.1); 
+    border: 2px solid #00ff00; 
+    border-radius: 0; 
+    padding: 10px; 
+    margin-top: 10px; 
+    text-align: left;
+    font-size: 12px;
+}
+
+#quest-image {
+    width: 255px; 
+    height: auto; 
+    margin: 0 auto; 
+    display: block; 
+    margin: 20px auto;
+}
+
+.quest-item.selected {
+    background-color: #00ff00; 
+    color: #1c1c1c; 
+    border-color: #00ff00; 
+}
+
+.quest-item {
+    width: calc(100% - 22px); 
+    padding: 10px;
+    border: 2px solid #00ff00; 
+    background-color: #1c1c1c; 
+    border-radius: 5px; 
+    margin-bottom: 10px; 
+    box-sizing: border-box; 
+}
+
+#item-list li {
+    position: relative;
+    cursor: pointer;
+    background-color: #1c1c1c;
+    padding: 10px;
+    border: none;
+    border-bottom: 2px solid #00ff00;
+    margin-bottom: 10px;
+    color: #00ff00;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    width: 159px;
+}
+
+#item-list li:hover {
+    background-color: #00ff00;
+    color: #1c1c1c;
+}
+
+#item-details {
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    justify-content: flex-start; 
+    padding: 20px;
+    position: absolute;
+    right: 10px; 
+    top: 160px; 
+}
+
+#item-sprite {
+    width: 150px; 
+    height: auto;
+    margin-bottom: 10px;
+    margin-left: 75px
+}
+
+#item-description {
+    text-align: center; 
+    font-size: 14px;
+    color: #00ff00;
+    max-width: 300px;
+}
+
+.item-description-container {
+        background-color: rgba(0, 255, 0, 0.2); 
+        padding: 10px;
+        border: 2px solid #00ff00; 
+        border-radius: 0; 
+        max-width: 300px;
+        width: 100%;
+        box-sizing: border-box;
+        text-align: center; 
+        margin-right: 10px;   
+}
+
+#main-text {
+    font-size: 14px; 
+    text-align: center;
+}
+
+#additional-text {
+    font-size: 14px; 
+    background-color: rgba(0, 255, 0, 0.2); 
+    border: 2px solid #00ff00; 
+    padding: 10px; 
+    border-radius: 0;  
+}
+
+#quest-list li::before {
+    content: '';
+    display: inline-block;
+    width: 5px; 
+    height:5px; 
+    background-color: #1c1c1c; 
+    border: 2px solid #1c1c1c; 
+    border-radius: 0; 
+    margin-right: -10px;
+    vertical-align: top; 
+    position: relative; 
+    top: 5px; 
+}
+
+#item-sprite {
+    display: none; /* Nascondi l'immagine dell'oggetto */
+}
+
+.item-description-container {
+    display: none; /* Nascondi il contenitore della descrizione dell'oggetto */
+}
